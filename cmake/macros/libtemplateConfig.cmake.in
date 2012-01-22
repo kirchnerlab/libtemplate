@@ -1,0 +1,22 @@
+# Find the libpipe includes and library
+#
+# LIBTEMPLATE_INCLUDE_DIR - where to find libpipe.h
+# LIBTEMPLATE_LIBRARIES - List of fully qualified libraries to link against
+#
+# LIBTEMPLATE_FOUND - set to 1 if found
+#
+# Do not delete this file if you want to use find_package(libtemplate)
+# in your cmake project
+
+
+include("@CMAKE_INSTALL_PREFIX@/lib/libpipe/cmake/libtemplateLibraryDepends.cmake")     
+
+
+set (LIBTEMPLATE_FOUND 1)
+
+set (LIBTEMPLATE_INCLUDE_DIR "@LIBTEMPLATE_INCLUDE@")
+
+set(LIBTEMPLATE_LIBRARIES template)
+
+set(libtemplate_BUILD_SETTINGS_FILE  "@CMAKE_INSTALL_PREFIX@/lib/libpipe/libtemplateLibraryDepends.cmake")
+
