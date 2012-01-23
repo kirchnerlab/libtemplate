@@ -27,7 +27,7 @@ done
 FILES=`egrep -Rl '__[Pp][Rr][oO][jJ]|__targetname__' * | grep -v config_template.sh`
 for f in ${FILES} ; do
     echo "Replacing variables in $f."
-    echo sed -i .bak "s/__projectname__/$PROJECTNAME_LOWERCASE/g;s/__PROJECTNAME__/$PROJECTNAME_UPPERCASE/g;s/__targetname__/$TARGETNAME/g" $f
+    sed -i .bak "s/__projectname__/$PROJECTNAME_LOWERCASE/g;s/__PROJECTNAME__/$PROJECTNAME_UPPERCASE/g;s/__targetname__/$TARGETNAME/g" $f
     rm -f $f.bak
 done
 

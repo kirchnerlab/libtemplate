@@ -10,7 +10,7 @@ TARGET_LINK_LIBRARIES(__targetname__
 )
 
 
-INSTALL(TARGETS template
+INSTALL(TARGETS __targetname__
     EXPORT __targetname__LibraryDepends
     LIBRARY DESTINATION lib
     RUNTIME DESTINATION bin
