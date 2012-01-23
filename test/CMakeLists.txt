@@ -14,7 +14,7 @@ ENDIF(VALGRIND_EXECUTABLE STREQUAL "VALGRIND_EXECUTABLE-NOTFOUND")
 ##############################################################################
 # macro definitions
 ##############################################################################
-MACRO(ADD_LIBTEMPLATE_TEST name exe src)
+MACRO(ADD_TEST name exe src)
     STRING(REGEX REPLACE "test_([^ ]+).*" "\\1" test "${exe}" )
     # build the test
     ADD_EXECUTABLE(${exe} ${src})
@@ -39,14 +39,14 @@ MACRO(ADD_LIBTEMPLATE_TEST name exe src)
         #Add target for the memory test
         ADD_CUSTOM_TARGET(${memtest_name} COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/memcheck.py ${CMAKE_CURRENT_BINARY_DIR}/${exe})
     ENDIF (HAVE_VALGRIND) 
-ENDMACRO(ADD_LIBTEMPLATE_TEST name exe src)
+ENDMACRO(ADD_TEST name exe src)
 
 # include directories
 INCLUDE_DIRECTORIES(
-    ${LIBTEMPLATE_SOURCE_DIR}/test/include
-    ${LIBTEMPLATE_SOURCE_DIR}/include
-    ${LIBTEMPLATE_BINARY_DIR}/include
-    ${LIBTEMPLATE_BINARY_DIR}/test/include
+    ${__PROJECTNAME___SOURCE_DIR}/test/include
+    ${__PROJECTNAME___SOURCE_DIR}/include
+    ${__PROJECTNAME___BINARY_DIR}/include
+    ${__PROJECTNAME___BINARY_DIR}/test/include
     ${CMAKE_CURRENT_SOURCE_DIR}   
 )
 

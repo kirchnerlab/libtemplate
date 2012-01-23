@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2012 User
  *
- * This file is part of libitemplate.
+ * This file is part of __projectname__.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,12 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#ifndef __LIBTEMPLATE_INCLUDE_TEMPLATE_CONFIG_HPP__
+#ifndef __LIB__PROJECTNAME___INCLUDE___PROJECTNAME___CONFIG_HPP__
 
 #ifdef _WIN32
     #define VC_EXTRALEAN
     #include <windows.h>
-    #define TEMPLATE_EXPORT __declspec( dllexport )
+    #define __PROJECTNAME___EXPORT __declspec( dllexport )
     #pragma warning (disable: 4251) // http://www.unknownroad.com/rtfm/VisualStudio/warningC4251.html
     #pragma warning (disable: 4101) // warnings to catch statment of Exceptions without using them
     #pragma warning (disable: 4503) // for warnings related to long definitions in boost and std
@@ -35,7 +35,7 @@
     #undef max
     #undef min
 #else
-    #define TEMPLATE_EXPORT
+    #define __PROJECTNAME___EXPORT
 #endif
 
 #endif

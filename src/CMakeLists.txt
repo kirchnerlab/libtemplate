@@ -3,15 +3,15 @@ SET(SRCS
     Dummy.cpp
 )
 
-ADD_LIBRARY(template ${SRCS})
+ADD_LIBRARY(__targetname__ ${SRCS})
 
-TARGET_LINK_LIBRARIES(template
+TARGET_LINK_LIBRARIES(__targetname__
     #${Boost_LIBRARIES}
 )
 
 
 INSTALL(TARGETS template
-    EXPORT libtemplateLibraryDepends
+    EXPORT __targetname__LibraryDepends
     LIBRARY DESTINATION lib
     RUNTIME DESTINATION bin
     ARCHIVE DESTINATION lib

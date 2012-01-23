@@ -1,17 +1,17 @@
 #!/bin/bash
 
-cd @LIBTEMPLATE_BINARY_DIR@
+cd @__PROJECTNAME___BINARY_DIR@
 
 make test
 
-mkdir -p @LIBTEMPLATE_BINARY_DIR@/coverage
+mkdir -p @__PROJECTNAME___BINARY_DIR@/coverage
 
 #check if gcovr exists
 hash gcovr &> /dev/null
 if [ $? -eq 1 ]; 
 	then     echo >&2 "gcovr not found. Therfore no xml coverage output can be generated"; 
 else
-	gcovr -r @LIBTEMPLATE_BINARY_DIR@ -f '.*libtemplate' -e '.*test' -x > @LIBTEMPLATE_BINARY_DIR@/coverage/coverage.xml
+	gcovr -r @__PROJECTNAME___BINARY_DIR@ -f '.*libtemplate' -e '.*test' -x > @__PROJECTNAME___BINARY_DIR@/coverage/coverage.xml
 fi
 
 #check if genhtml exists
@@ -20,13 +20,13 @@ if [ $? -eq 1 ];
 	then     echo >&2 "genhtml not found. Therfore no html coverage output can be generated"; 
 else
 
-	lcov --directory @LIBTEMPLATE_BINARY_DIR@/test/CMakeFiles \
-	     --directory @LIBTEMPLATE_BINARY_DIR@/src/CMakeFiles/template.dir \
-	     --directory @LIBTEMPLATE_BINARY_DIR@/src/CMakeFiles \
-	     -capture --output-file @LIBTEMPLATE_BINARY_DIR@/coverage/template.info
-	lcov --extract @LIBTEMPLATE_BINARY_DIR@/coverage/template.info '*libtemplate*' -o @LIBTEMPLATE_BINARY_DIR@/coverage/template.info.extracted
-	lcov --remove @LIBTEMPLATE_BINARY_DIR@/coverage/template.info.extracted '*test*' -o @LIBTEMPLATE_BINARY_DIR@/coverage/template.info.extracted2
-	pushd @LIBTEMPLATE_BINARY_DIR@/coverage/
+	lcov --directory @__PROJECTNAME___BINARY_DIR@/test/CMakeFiles \
+	     --directory @__PROJECTNAME___BINARY_DIR@/src/CMakeFiles/template.dir \
+	     --directory @__PROJECTNAME___BINARY_DIR@/src/CMakeFiles \
+	     -capture --output-file @__PROJECTNAME___BINARY_DIR@/coverage/template.info
+	lcov --extract @__PROJECTNAME___BINARY_DIR@/coverage/template.info '*libtemplate*' -o @__PROJECTNAME___BINARY_DIR@/coverage/template.info.extracted
+	lcov --remove @__PROJECTNAME___BINARY_DIR@/coverage/template.info.extracted '*test*' -o @__PROJECTNAME___BINARY_DIR@/coverage/template.info.extracted2
+	pushd @__PROJECTNAME___BINARY_DIR@/coverage/
 	genhtml --demangle-cpp --legend --show-details template.info.extracted2
 	popd
 fi

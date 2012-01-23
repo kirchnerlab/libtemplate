@@ -1,4 +1,4 @@
-PROJECT(LIBTEMPLATE)
+PROJECT(__PROJECTNAME__)
 
 # require at least cmake 2.8
 cmake_minimum_required(VERSION 2.8)
@@ -10,11 +10,11 @@ SET(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/macros)
 
 # require out-of-source build
 INCLUDE(require_out_of_src_build)
-MACRO_REQUIRE_OUT_OF_SRC_BUILD("LIBTEMPLATE requires out-of-source builds.")
+MACRO_REQUIRE_OUT_OF_SRC_BUILD("__PROJECTNAME__ requires out-of-source builds.")
 
-# Git revision saved in variable LIBTEMPLATE_VERSION
+# Git revision saved in variable __PROJECTNAME___VERSION
 INCLUDE(GetGitRevisionDescription)
-get_git_head_revision(GIT_REFSPEC LIBTEMPLATE_VERSION)
+get_git_head_revision(GIT_REFSPEC __PROJECTNAME___VERSION)
 
 #############################################################################
 # Varaibles to upper string for easier comparisions
@@ -35,8 +35,8 @@ STRING(TOUPPER ${CMAKE_BUILD_TYPE} CMAKE_BUILD_TYPE)
 #SET(BOOST_MIN_VERSION "1.46.0")
 #FIND_PACKAGE(Boost ${BOOST_MIN_VERSION} COMPONENTS thread REQUIRED)
 
-INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
-LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
+#INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
+#LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
 
 #############################################################################
 # compiler Flags
@@ -53,8 +53,8 @@ endif(CMAKE_COMPILER_IS_GNUCXX)
 # Cmake generated header files
 #############################################################################
 CONFIGURE_FILE(
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/template/config.hpp.cmake 
-    ${LIBTEMPLATE_BINARY_DIR}/include/template/config.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/__targetname__/config.hpp.cmake 
+    ${__PROJECTNAME___BINARY_DIR}/include/__targetname__/config.hpp
 )
 
 #############################################################################
@@ -62,7 +62,7 @@ CONFIGURE_FILE(
 #############################################################################
 
 OPTION(ENABLE_TESTING "Compile tests" ON)
-OPTION(ENABLE_COVERAGE "Enable GCov coverage analysis (defines a 'coverage' target and enforces static build of libtemplate)" OFF)
+OPTION(ENABLE_COVERAGE "Enable GCov coverage analysis (defines a 'coverage' target and enforces static build of __projectname__)" OFF)
 OPTION(ENABLE_EXAMPLES "Compile examples" OFF)
 OPTION(ENABLE_THREADING "Enable threading" FALSE)
 
@@ -71,14 +71,14 @@ OPTION(ENABLE_THREADING "Enable threading" FALSE)
 #############################################################################
 
 INCLUDE_DIRECTORIES(
-    ${LIBTEMPLATE_SOURCE_DIR}/include
-    ${LIBTEMPLATE_BINARY_DIR}/include
+    ${__PROJECTNAME___SOURCE_DIR}/include
+    ${__PROJECTNAME___BINARY_DIR}/include
 )
 
 #############################################################################
 # messages and error handling
 #############################################################################
-MESSAGE(STATUS "libtemplate Git Commit: "${LIBTEMPLATE_VERSION})
+MESSAGE(STATUS "__projectname__ Git Commit: "${__PROJECTNAME___VERSION})
 MESSAGE(STATUS "Build type: "${CMAKE_BUILD_TYPE})
 MESSAGE(STATUS "CMAKE_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX}")
 IF(ENABLE_THREADING)
@@ -116,12 +116,12 @@ ENDIF()
 IF (ENABLE_COVERAGE)
     IF(CMAKE_BUILD_TYPE STREQUAL "DEBUG" AND ENABLE_TESTING)
         SET (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fprofile-arcs -ftest-coverage")
-        CONFIGURE_FILE(${LIBTEMPLATE_SOURCE_DIR}/cmake/scripts/coverage.sh.in
-            ${LIBTEMPLATE_BINARY_DIR}/cmake/scripts/coverage.sh
+        CONFIGURE_FILE(${__PROJECTNAME___SOURCE_DIR}/cmake/scripts/coverage.sh.in
+            ${__PROJECTNAME___BINARY_DIR}/cmake/scripts/coverage.sh
             @ONLY IMMEDIATE
         )
         ADD_CUSTOM_TARGET(
-            coverage COMMAND /bin/bash ${LIBTEMPLATE_BINARY_DIR}/cmake/scripts/coverage.sh
+            coverage COMMAND /bin/bash ${__PROJECTNAME___BINARY_DIR}/cmake/scripts/coverage.sh
         )        
     ENDIF()
 ENDIF(ENABLE_COVERAGE)
@@ -139,7 +139,7 @@ ENDIF (ENABLE_TESTING)
 
 
 #############################################################################
-# build libtemplate
+# build __projectname__
 #############################################################################
 
 ADD_SUBDIRECTORY(src)
@@ -156,19 +156,19 @@ ADD_SUBDIRECTORY(src)
 # documentation
 #############################################################################
 # doxygen support
-CONFIGURE_FILE(${LIBTEMPLATE_SOURCE_DIR}/doc/Doxyfile.cmake
-    ${LIBTEMPLATE_BINARY_DIR}/doc/Doxyfile
+CONFIGURE_FILE(${__PROJECTNAME___SOURCE_DIR}/doc/Doxyfile.cmake
+    ${__PROJECTNAME___BINARY_DIR}/doc/Doxyfile
     @ONLY IMMEDIATE
     )
-CONFIGURE_FILE(${LIBTEMPLATE_SOURCE_DIR}/doc/libtemplate.png
-    ${LIBTEMPLATE_BINARY_DIR}/doc/libtemplate.png
+CONFIGURE_FILE(${__PROJECTNAME___SOURCE_DIR}/doc/__projectname__.png
+    ${__PROJECTNAME___BINARY_DIR}/doc/__projectname__.png
     COPYONLY
     )
 
 FIND_PACKAGE(Doxygen)
 
 # target for doxygen
-ADD_CUSTOM_TARGET(doc COMMAND ${DOXYGEN} ${LIBTEMPLATE_BINARY_DIR}/doc/Doxyfile)
+ADD_CUSTOM_TARGET(doc COMMAND ${DOXYGEN} ${__PROJECTNAME___BINARY_DIR}/doc/Doxyfile)
 
 #############################################################################
 # installation
@@ -176,7 +176,7 @@ ADD_CUSTOM_TARGET(doc COMMAND ${DOXYGEN} ${LIBTEMPLATE_BINARY_DIR}/doc/Doxyfile)
 # location, location, location
 IF(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 SET(CMAKE_INSTALL_PREFIX
-"/usr/local" CACHE PATH "libtemplate install prefix" FORCE
+"/usr/local" CACHE PATH "__projectname__ install prefix" FORCE
 )
 ENDIF(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 # so that the dmg works also to the given location
@@ -184,50 +184,50 @@ SET(CPACK_PACKAGE_DEFAULT_LOCATION ${CMAKE_INSTALL_PREFIX})
 
 
 # headers
-INSTALL(DIRECTORY ${LIBTEMPLATE_SOURCE_DIR}/include/libtemplate
+INSTALL(DIRECTORY ${__PROJECTNAME___SOURCE_DIR}/include/__projectname__
     DESTINATION include
     COMPONENT headers
     REGEX "/.git$" EXCLUDE
     PATTERN "config.hpp.cmake" EXCLUDE)
 
 # config.h
-INSTALL(FILES ${LIBTEMPLATE_BINARY_DIR}/include/libtemplate/config.hpp
-    DESTINATION include/libtemplate
+INSTALL(FILES ${__PROJECTNAME___BINARY_DIR}/include/__projectname__/config.hpp
+    DESTINATION include/__projectname__
     COMPONENT headers)
 
 # documentation
-INSTALL(DIRECTORY ${LIBTEMPLATE_BINARY_DIR}/doc
-    DESTINATION share/libtemplate
+INSTALL(DIRECTORY ${__PROJECTNAME___BINARY_DIR}/doc
+    DESTINATION share/__projectname__
     COMPONENT documentation
     PATTERN "Doxyfile" EXCLUDE)
 
 
 
 ##############################################################################
-## exporting libtemplate
+## exporting __projectname__
 ##############################################################################
-get_target_property(LIBTEMPLATE_LIBRARY template LOCATION)
+get_target_property(__PROJECTNAME___LIBRARY __targetname__ LOCATION)
 
-get_filename_component(LIBTEMPLATE_INSTALL_LIBRARY ${LIBTEMPLATE_LIBRARY} NAME)
+get_filename_component(__PROJECTNAME___INSTALL_LIBRARY ${__PROJECTNAME___LIBRARY} NAME)
 
-set (LIBTEMPLATE_LIBRARY ${CMAKE_INSTALL_PREFIX}/lib/${LIBTEMPLATE_INSTALL_LIBRARY})
-set (LIBTEMPLATE_INCLUDE ${CMAKE_INSTALL_PREFIX}/include)
+set (__PROJECTNAME___LIBRARY ${CMAKE_INSTALL_PREFIX}/lib/${__PROJECTNAME___INSTALL_LIBRARY})
+set (__PROJECTNAME___INCLUDE ${CMAKE_INSTALL_PREFIX}/include)
 
 configure_file(
-    "${PROJECT_SOURCE_DIR}/cmake/macros/libtemplateConfig.cmake.in"
-    "${PROJECT_BINARY_DIR}/InstallFiles/libtemplateConfig.cmake")
+    "${PROJECT_SOURCE_DIR}/cmake/macros/__projectname__Config.cmake.in"
+    "${PROJECT_BINARY_DIR}/InstallFiles/__projectname__Config.cmake")
    
-export(TARGETS template
-  FILE "${PROJECT_BINARY_DIR}/InstallFiles/libtemplateLibraryDepends.cmake")
+export(TARGETS __targetname__
+  FILE "${PROJECT_BINARY_DIR}/InstallFiles/__projectname__LibraryDepends.cmake")
  
-export(PACKAGE template)
+export(PACKAGE __targetname__)
     
 if (UNIX)    
-    INSTALL(FILES "${PROJECT_BINARY_DIR}/InstallFiles/libtemplateConfig.cmake" DESTINATION /lib/libtemplate/)
-    INSTALL(FILES "${PROJECT_BINARY_DIR}/InstallFiles/libtemplateLibraryDepends.cmake" DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/libtemplate/cmake/)
+    INSTALL(FILES "${PROJECT_BINARY_DIR}/InstallFiles/__projectname__Config.cmake" DESTINATION /lib/__projectname__/)
+    INSTALL(FILES "${PROJECT_BINARY_DIR}/InstallFiles/__projectname__LibraryDepends.cmake" DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/__projectname__/cmake/)
 elseif(WIN32)
-    INSTALL(FILES "${PROJECT_BINARY_DIR}/InstallFiles/libtemplateConfig.cmake" DESTINATION /cmake/)
-    INSTALL(FILES "${PROJECT_BINARY_DIR}/InstallFiles/libtemplateLibraryDepends.cmake" DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/libtemplate/cmake/)
+    INSTALL(FILES "${PROJECT_BINARY_DIR}/InstallFiles/__projectname__Config.cmake" DESTINATION /cmake/)
+    INSTALL(FILES "${PROJECT_BINARY_DIR}/InstallFiles/__projectname__LibraryDepends.cmake" DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/__projectname__/cmake/)
     
 endif()
 
@@ -237,17 +237,17 @@ endif()
 ## FIXME: make sure that the documentation is compiled and pdfs are 
 ##        generated prior to packaging!
 #
-set(CPACK_PACKAGE_NAME "libtemplate")
+set(CPACK_PACKAGE_NAME "__projectname__")
 set(CPACK_PACKAGE_VENDOR "kirchnerlab.org")
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "A library template; version "$LIBTEMPLATE_VERSION)
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "The __targetname__ library; version "$__PROJECTNAME___VERSION)
 
 # CPack version strings
 SET(CPACK_PACKAGE_VERSION_MAJOR 2)
 SET(CPACK_PACKAGE_VERSION_MINOR 1)
 SET(CPACK_PACKAGE_VERSION_PATCH 0)
 
-SET(CPACK_RESOURCE_FILE_README "${LIBTEMPLATE_SOURCE_DIR}/README.txt")
-SET(CPACK_RESOURCE_FILE_LICENSE "${LIBTEMPLATE_SOURCE_DIR}/LICENSE.txt")
+SET(CPACK_RESOURCE_FILE_README "${__PROJECTNAME___SOURCE_DIR}/README.txt")
+SET(CPACK_RESOURCE_FILE_LICENSE "${__PROJECTNAME___SOURCE_DIR}/LICENSE.txt")
 
 set(CPACK_COMPONENTS_ALL libraries headers documentation examples)
 set(CPACK_COMPONENT_LIBRARIES_DISPLAY_NAME "Libraries")
@@ -258,9 +258,9 @@ set(CPACK_COMPONENT_EXAMPLES_DISPLAY_NAME "Compiled Examples")
 set(CPACK_COMPONENT_LIBRARIES_DESCRIPTION
     "Compiled libraries.")
 set(CPACK_COMPONENT_HEADERS_DESCRIPTION
-    "C++ header files for libtemplate development.")
+    "C++ header files for __projectname__ development.")
 set(CPACK_COMPONENT_DOCUMENTATION_DESCRIPTION
-    "The C++ libtemplate interface documentation (Doxygen).")
+    "The C++ __projectname__ interface documentation (Doxygen).")
 set(CPACK_COMPONENT_EXAMPLES_DESCRIPTION
     "Compiled examples.")
 
