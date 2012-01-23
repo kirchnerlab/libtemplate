@@ -18,7 +18,7 @@
 # exceed 55 pixels and the maximum width should not exceed 200 pixels. 
 # Doxygen will copy the logo to the output directory.
 
-PROJECT_LOGO           = @LIBTEMPLATE_BINARY_DIR@/doc/libtemplate.png
+PROJECT_LOGO           = @__PROJECTNAME___BINARY_DIR@/doc/__projectname__.png
 
 # This tag specifies the encoding used for all characters in the config file
 # that follow. The default is UTF-8 which is also the encoding used for all
@@ -40,14 +40,14 @@ PROJECT_BRIEF          = "A C++ librarty template library"
 # This could be handy for archiving the generated documentation or
 # if some version control system is used.
 
-PROJECT_NUMBER         = @LIBTEMPLATE_VERSION@
+PROJECT_NUMBER         = @__PROJECTNAME___VERSION@
 
 # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute)
 # base path where the generated documentation will be put.
 # If a relative path is entered, it will be relative to the location
 # where doxygen was started. If left blank the current directory will be used.
 
-OUTPUT_DIRECTORY       = @LIBTEMPLATE_BINARY_DIR@/doc
+OUTPUT_DIRECTORY       = @__PROJECTNAME___BINARY_DIR@/doc
 
 # If the CREATE_SUBDIRS tag is set to YES, then doxygen will create
 # 4096 sub-directories (in 2 levels) under the output directory of each output
@@ -132,7 +132,7 @@ STRIP_FROM_PATH        = @L
 # definition is used. Otherwise one should specify the include paths that
 # are normally passed to the compiler using the -I flag.
 
-STRIP_FROM_INC_PATH    = @LIBTEMPLATE_SOURCE_DIR@
+STRIP_FROM_INC_PATH    = @__PROJECTNAME___SOURCE_DIR@
 
 # If the SHORT_NAMES tag is set to YES, doxygen will generate much shorter
 # (but less readable) file names. This can be useful is your file systems
@@ -577,7 +577,7 @@ WARN_LOGFILE           =
 # directories like "/usr/src/myproject". Separate the files or directories
 # with spaces.
 
-INPUT                  = @LIBTEMPLATE_SOURCE_DIR@/doc @LIBTEMPLATE_SOURCE_DIR@/include @LIBTEMPLATE_SOURCE_DIR@/src @LIBTEMPLATE_SOURCE_DIR@/examples
+INPUT                  = @__PROJECTNAME___SOURCE_DIR@/doc @__PROJECTNAME___SOURCE_DIR@/include @__PROJECTNAME___SOURCE_DIR@/src @__PROJECTNAME___SOURCE_DIR@/examples
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding, which is
@@ -634,7 +634,7 @@ EXCLUDE_SYMBOLS        =
 # directories that contain example code fragments that are included (see
 # the \include command).
 
-EXAMPLE_PATH           = @LIBTEMPLATE_SOURCE_DIR@/doc @LIBTEMPLATE_SOURCE_DIR@/examples
+EXAMPLE_PATH           = @__PROJECTNAME___SOURCE_DIR@/doc @__PROJECTNAME___SOURCE_DIR@/examples
 
 # If the value of the EXAMPLE_PATH tag contains directories, you can use the
 # EXAMPLE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp
@@ -654,7 +654,7 @@ EXAMPLE_RECURSIVE      = NO
 # directories that contain image that are included in the documentation (see
 # the \image command).
 
-IMAGE_PATH             = @LIBTEMPLATE_SOURCE_DIR@/doc/
+IMAGE_PATH             = @__PROJECTNAME___SOURCE_DIR@/doc/
 
 # The INPUT_FILTER tag can be used to specify a program that doxygen should
 # invoke to filter for each input file. Doxygen will invoke the filter program
@@ -776,7 +776,7 @@ GENERATE_HTML          = YES
 # If a relative path is entered the value of OUTPUT_DIRECTORY will be
 # put in front of it. If left blank `html' will be used as the default path.
 
-HTML_OUTPUT            = @LIBTEMPLATE_BINARY_DIR@/doc/html
+HTML_OUTPUT            = @__PROJECTNAME___BINARY_DIR@/doc/html
 
 # The HTML_FILE_EXTENSION tag can be used to specify the file extension for
 # each generated HTML page (for example: .htm,.php,.asp). If it is left blank
@@ -788,7 +788,7 @@ HTML_FILE_EXTENSION    = .html
 # each generated HTML page. If it is left blank doxygen will generate a
 # standard header.
 
-HTML_HEADER            =   @LIBTEMPLATE_SOURCE_DIR@/doc/header.html
+HTML_HEADER            =   @__PROJECTNAME___SOURCE_DIR@/doc/header.html
 
 # The HTML_FOOTER tag can be used to specify a personal HTML footer for
 # each generated HTML page. If it is left blank doxygen will generate a
@@ -803,7 +803,7 @@ HTML_FOOTER            =
 # the style sheet file to the HTML output directory, so don't put your own
 # stylesheet in the HTML output directory as well, or it will be erased!
 
-HTML_STYLESHEET        = @LIBTEMPLATE_SOURCE_DIR@/doc/doxygen.css
+HTML_STYLESHEET        = @__PROJECTNAME___SOURCE_DIR@/doc/doxygen.css
 
 # If the HTML_ALIGN_MEMBERS tag is set to YES, the members of classes,
 # files or namespaces will be aligned in HTML using tables. If set to
@@ -1304,7 +1304,7 @@ SKIP_FUNCTION_MACROS   = YES
 # If a tag file is not located in the directory in which doxygen
 # is run, you must also specify the path to the tagfile here.
 
-TAGFILES               ="@LIBTEMPLATE_SOURCE_DIR@/doc/libstdc++.tag = http://gcc.gnu.org/onlinedocs/libstdc++/latest-doxygen"
+TAGFILES               ="@__PROJECTNAME___SOURCE_DIR@/doc/libstdc++.tag = http://gcc.gnu.org/onlinedocs/libstdc++/latest-doxygen"
 
 # When a file name is specified after GENERATE_TAGFILE, doxygen will create
 # a tag file that is based on the input files it reads.
