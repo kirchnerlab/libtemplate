@@ -1,4 +1,4 @@
-libtemplate, Copyright (c) 2012 User Name
+libtemplate, Copyright (c) 2012 Marc Kirchner
 
 This file is part of libtemplate.
 
